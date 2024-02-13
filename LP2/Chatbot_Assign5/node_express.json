@@ -1,0 +1,104 @@
+{
+    "questions": [
+        {
+            "question": "What is Node.js?",
+            "answer": "Node.js is a JavaScript runtime built on the V8 JavaScript engine."
+        },
+        {
+            "question": "How can you handle asynchronous operations in Node.js?",
+            "answer": "Node.js uses an event-driven, non-blocking I/O model."
+        },
+        {
+            "question": "What is npm?",
+            "answer": "npm is the default package manager for Node.js."
+        },
+        {
+            "question": "Explain the 'require' function in Node.js.",
+            "answer": "The 'require' function is used to include external modules in Node.js."
+        },
+        {
+            "question": "What is the purpose of package.json in a Node.js project?",
+            "answer": "package.json contains metadata about the project and dependencies."
+        },
+        {
+            "question": "How can you handle file operations in Node.js?",
+            "answer": "Node.js provides 'fs' module for file operations."
+        },
+        {
+            "question": "What is the purpose of the 'module.exports' in Node.js?",
+            "answer": "'module.exports' is used to expose functions or objects from a module."
+        },
+        {
+            "question": "What is the Event Loop in Node.js?",
+            "answer": "The Event Loop is a core concept in Node.js for handling asynchronous operations."
+        },
+        {
+            "question": "What is the difference between 'let' and 'var' in JavaScript?",
+            "answer": "'let' has block scope, while 'var' has function scope."
+        },
+        {
+            "question": "How can you install external modules using npm?",
+            "answer": "You can use 'npm install <module-name>' to install external modules."
+        },
+        {
+            "question": "What is Express.js?",
+            "answer": "Express.js is a web application framework for Node.js."
+        },
+        {
+            "question": "How do you install Express.js?",
+            "answer": "You can install Express.js using 'npm install express'."
+        },
+        {
+            "question": "What is routing in Express.js?",
+            "answer": "Routing is a way to handle different HTTP requests and URLs in Express.js."
+        },
+        {
+            "question": "Explain middleware in Express.js.",
+            "answer": "Middleware are functions that have access to the request, response, and next function in the application's request-response cycle."
+        },
+        {
+            "question": "How can you handle POST requests in Express.js?",
+            "answer": "You can use the 'body-parser' middleware to handle POST requests."
+        },
+        {
+            "question": "What is MongoDB?",
+            "answer": "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents."
+        },
+        {
+            "question": "How do you connect to MongoDB using Node.js?",
+            "answer": "You can use the 'mongodb' driver for Node.js to connect to MongoDB."
+        },
+        {
+            "question": "What is Mongoose in the context of MongoDB?",
+            "answer": "Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js."
+        },
+        {
+            "question": "How do you perform CRUD operations in MongoDB?",
+            "answer": "You can use methods like insertOne, findOne, updateOne, and deleteOne for CRUD operations in MongoDB."
+        },
+        {
+            "question": "What is the purpose of the 'ObjectId' in MongoDB?",
+            "answer": "ObjectId is a unique identifier for documents in a MongoDB collection."
+        },
+        {
+            "question": "How can you create a RESTful API using Express.js?",
+            "answer": "You can define routes for different HTTP methods to create a RESTful API in Express.js."
+        },
+        {
+            "question": "What is the purpose of the 'app.use()' function in Express.js?",
+            "answer": "'app.use()' is used to configure middleware in Express.js."
+        },
+        {
+            "question": "How do you perform aggregation in MongoDB?",
+            "answer": "Aggregation in MongoDB is performed using the aggregate method."
+        },
+        {
+            "question": "Explain the concept of middleware chaining in Express.js.",
+            "answer": "Middleware functions can be chained together using 'app.use()' to execute them in a specific order."
+        },
+        {
+            "question": "What is the role of the 'express.static' middleware?",
+            "answer": "'express.static' is used to serve static files such as images, CSS, and JavaScript in Express.js."
+        }
+    ]
+}
