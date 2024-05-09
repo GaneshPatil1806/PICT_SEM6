@@ -1,38 +1,47 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Flight {
-public:
-
-    string flightNumber;
-    string departure;
-    string destination;
-    string departureTime;
+class Flight{
 
 public:
-    Flight(string number, string dep, string dest, string time)
-        : flightNumber(number), departure(dep), destination(dest), departureTime(time) {}
+    string destination,departure,departureTime,flightNumber;
 
-    string getFlightNumber() const {
+    Flight(string dest,string dep,string dt,string fn) : destination(dest),departure(dep),
+    departureTime(dt),flightNumber(fn) {};
+
+    string getDeparture() const {
+        return departure;
+    }
+
+    string getDepartureTime() const{
+        return departureTime;
+    }
+
+    string getDestination() const{
+        return destination;
+    }
+    string getFlightNumber() const{
         return flightNumber;
     }
 
-    string getDepartureTime() const {
-        return departureTime;
+    string adjustTime(string time,int adj){
+
+        int hours = stoi(time.substr(0,2));
+        int minutes = stoi(time.substr(3));
+
+        hours = (hours+adj)%24;
+        
+        string newTime = (hours<10 ? "0":"") + to_string(hours) + (minutes<10 ? "0":"") + to_string(minutes);
+        return newTime;
     }
-    string getDeparture()const{
-        return departure;
-    }
-    string getDestination()const{
-        return destination;
-    }
-    bool overlaps(const Flight& other) const {
+
+    bool overlaps(const Flight other) const {
         return departure == other.departure && departureTime == other.departureTime;
     }
 
-    void display() const {
-        cout << "Flight: " << flightNumber << ", Departure: " << departure
-             << ", Destination: " << destination << ", Departure Time: " << departureTime << endl;
+    void display(){
+        cout<<"FN: "<<flightNumber<<"\n"<<"Dest: "<<destination<<"\n"<<"DT: "<<departureTime<<"\n"
+        <<"D: "<<departure<<endl;
     }
 };
 
@@ -40,26 +49,14 @@ class AirlineSystem {
 public:
     vector<Flight> flights;
 
-    bool isFlightOverlapping(const Flight& newFlight) const {
-        for (const Flight& flight : flights) {
-            if (flight.overlaps(newFlight)) {
+    bool isFlightOverlapping(const Flight newFlight){
+        for(auto i:flights){
+            if(i.overlaps(newFlight)){
                 return true;
             }
         }
+
         return false;
-    }
-    
-    string adjustTime(string time,int adjFac)
-    {
-        int hours = stoi(time.substr(0, 2));
-        int minutes = stoi(time.substr(3));
-
-        // Add 1 hour
-        hours = (hours + adjFac) % 24;
-
-    // Convert hours and minutes back to string format
-    string newTime = (hours < 10 ? "0" : "") + to_string(hours) + ":" + (minutes < 10 ? "0" : "") + to_string(minutes);
-    return newTime;
     }
 
     void addFlight(const Flight& newFlight) {
@@ -91,16 +88,16 @@ public:
         }
     }
 
-    void removeFlight(const string& flightNumber) {
-        auto it = find_if(flights.begin(), flights.end(), [&flightNumber](const Flight& flight) {
+    void removeFlight(string flightNumber){
+        auto it = find_if(flights.begin(),flights.end(),[&flightNumber](const Flight &flight){
             return flight.getFlightNumber() == flightNumber;
         });
 
-        if (it != flights.end()) {
+        if(it!=flights.end()){
             flights.erase(it);
-            cout << "Flight " << flightNumber << " removed successfully." << endl;
-        } else {
-            cout << "Error: Flight " << flightNumber << " not found." << endl;
+        }
+        else{
+            cout<<"No flight found";
         }
     }
 
@@ -109,7 +106,7 @@ public:
             cout << "No flights scheduled." << endl;
         } else {
             cout << "Scheduled Flights:" << endl;
-            for (const Flight& flight : flights) {
+            for (Flight flight : flights) {
                 flight.display();
             }
         }
@@ -118,7 +115,7 @@ public:
     void searchFlightsByDepartureCity(const string& depCity) const {
         bool found = false;
         cout << "Flights departing from " << depCity << ":" << endl;
-        for (const Flight& flight : flights) {
+        for (Flight flight : flights) {
             if (flight.getDeparture() == depCity) {
                 flight.display();
                 found = true;
@@ -134,12 +131,13 @@ public:
         sort(sortedFlights.begin(), sortedFlights.end(), [](const Flight& a, const Flight& b) {
             return a.getDepartureTime() < b.getDepartureTime();
         });
-
+        
         cout << "Flights Sorted by Departure Time:" << endl;
-        for (const Flight& flight : sortedFlights) {
+        for (Flight flight : sortedFlights) {
             flight.display();
         }
     }
+
 };
 
 int main() {

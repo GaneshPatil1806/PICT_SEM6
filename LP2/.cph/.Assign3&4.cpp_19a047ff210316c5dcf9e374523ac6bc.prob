@@ -1,0 +1,1 @@
+{"name":"Local: Assign3&4","url":"d:\\TE\\SEM6\\LP2\\Assign3&4.cpp","tests":[{"id":1715273087016,"input":"5 7\n1 2 1\n1 3 4\n2 3 3\n2 4 7\n2 5 1\n3 5 9\n4 5 10","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\TE\\SEM6\\LP2\\Assign3&4.cpp","group":"local","local":true}
