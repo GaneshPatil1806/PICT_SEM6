@@ -1,0 +1,152 @@
+{
+  "questions": [
+    {
+      "question": "hello",
+      "answer": "hey how are you"
+    },
+    {
+      "question": "how can i help you",
+      "answer": "that my job sir"
+    },
+    {
+      "question": "appointment",
+      "answer": "let me check"
+    },
+    {
+      "question": "hi",
+      "answer": "hello"
+    },
+    {
+      "question": "which is you favourite car",
+      "answer": "lamborgini"
+    },
+    {
+      "question": "what is lamborgini price",
+      "answer": "37000"
+    },
+    {
+      "question": "import json",
+      "answer": "from difflib import get_close_matches"
+    },
+    {
+      "question": "",
+      "answer": "def load_knowledge_base(file_path):"
+    },
+    {
+      "question": "    with open(file_path, \"r\") as file:",
+      "answer": "        data = json.load(file)"
+    },
+    {
+      "question": "    return data ",
+      "answer": ""
+    },
+    {
+      "question": "def save_knowledge_base(file_path, data):",
+      "answer": "    with open(file_path, \"w\") as file:"
+    },
+    {
+      "question": "        json.dump(data, file, indent=2)",
+      "answer": ""
+    },
+    {
+      "question": "def find_best_match(user_question, questions):",
+      "answer": "    matches = get_close_matches(user_question, questions, n=1, cutoff=0.6)"
+    },
+    {
+      "question": "    if matches:",
+      "answer": "        return matches[0]"
+    },
+    {
+      "question": "    else:",
+      "answer": "        return None"
+    },
+    {
+      "question": "",
+      "answer": "def get_answer_for_question(question, knowledge_base):"
+    },
+    {
+      "question": "    for q in knowledge_base[\"questions\"]:",
+      "answer": "        if q[\"question\"] == question:"
+    },
+    {
+      "question": "            return q[\"answer\"]",
+      "answer": ""
+    },
+    {
+      "question": "def extract_nouns(question):",
+      "answer": "    # Simple rule-based approach to extract nouns"
+    },
+    {
+      "question": "    tokens = question.split()",
+      "answer": "    nouns = [word for word in tokens if word.isalpha() and word.lower() not in ['a', 'an', 'the']]"
+    },
+    {
+      "question": "",
+      "answer": "def resolve_nouns(user_input, previous_questions, knowledge_base):"
+    },
+    {
+      "question": "    nouns = []",
+      "answer": "    for question, answer in previous_questions:"
+    },
+    {
+      "question": "    for noun in nouns:",
+      "answer": "        if noun in user_input.lower():"
+    },
+    {
+      "question": "            best_match = find_best_match(noun, [q[\"question\"] for q in knowledge_base[\"questions\"]])",
+      "answer": "            if best_match:"
+    },
+    {
+      "question": "",
+      "answer": "def chat_bot():"
+    },
+    {
+      "question": "    knowledge_base = load_knowledge_base(\"./knowledge_base.json\")",
+      "answer": "    previous_questions = []"
+    },
+    {
+      "question": "",
+      "answer": "    while True:"
+    },
+    {
+      "question": "        user_input = input(\"\\nUser: \")",
+      "answer": "        if user_input.lower() == \"quit\":"
+    },
+    {
+      "question": "        ",
+      "answer": "        # Check for references to previous questions"
+    },
+    {
+      "question": "        resolved_noun = resolve_nouns(user_input.lower(), previous_questions, knowledge_base)",
+      "answer": "        if resolved_noun:"
+    },
+    {
+      "question": "",
+      "answer": "        best_match = find_best_match(user_input.lower(), [q[\"question\"] for q in knowledge_base[\"questions\"]])"
+    },
+    {
+      "question": "",
+      "answer": "        if best_match:"
+    },
+    {
+      "question": "            answer = get_answer_for_question(best_match, knowledge_base)",
+      "answer": "            print(\"\\nBot: \", answer)"
+    },
+    {
+      "question": "            print(\"\\nSorry! I couldn't understand what you meant. Could you help me?\")",
+      "answer": "            new_answer = input(\"Type the answer or type 'skip' to skip: \")"
+    },
+    {
+      "question": "",
+      "answer": "            if new_answer.lower() != \"skip\":"
+    },
+    {
+      "question": "",
+      "answer": "        previous_questions.append((user_input.lower(), answer))"
+    },
+    {
+      "question": "",
+      "answer": "chat_bot()"
+    }
+  ]
+}
