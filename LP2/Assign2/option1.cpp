@@ -3,7 +3,7 @@
 #include <queue>
 #include <set>
 #include <cmath>
-
+#include <map>
 using namespace std;
 
 // Structure to represent each state of the puzzle
@@ -29,7 +29,7 @@ struct PuzzleState
 };
 
 // Function to calculate the Manhattan distance heuristic
-int manhattanDistance(const vector<vector<int>> &board)
+int manhattanDistance(const vector<vector<int>> &board,map<int,pair<int,int>> &m)
 {
     int distance = 0;
     int n = board.size();
@@ -39,8 +39,8 @@ int manhattanDistance(const vector<vector<int>> &board)
         {
             if (board[i][j] != 0)
             {
-                int goalX = (board[i][j] - 1) / n;
-                int goalY = (board[i][j] - 1) % n;
+                int goalX = m[board[i][j]].first;
+                int goalY = m[board[i][j]].second;
                 distance += abs(i - goalX) + abs(j - goalY);
             }
         }
@@ -49,7 +49,7 @@ int manhattanDistance(const vector<vector<int>> &board)
 }
 
 // Function to get the next possible states from the current state
-vector<PuzzleState> getNextStates(const PuzzleState &current)
+vector<PuzzleState> getNextStates(const PuzzleState &current,map<int,pair<int,int>> &m)
 {
     vector<PuzzleState> nextStates;
     int n = current.board.size();
@@ -80,7 +80,7 @@ vector<PuzzleState> getNextStates(const PuzzleState &current)
         {
             vector<vector<int>> newBoard = current.board;
             swap(newBoard[x][y], newBoard[nx][ny]);
-            PuzzleState newState(newBoard, current.g + 1, manhattanDistance(newBoard));
+            PuzzleState newState(newBoard, current.g + 1, manhattanDistance(newBoard,m));
             nextStates.push_back(newState);
         }
     }
@@ -88,10 +88,11 @@ vector<PuzzleState> getNextStates(const PuzzleState &current)
 }
 
 // A* algorithm implementation
-vector<vector<int>> solvePuzzle(const vector<vector<int>> &initial)
+vector<vector<int>> solvePuzzle(const vector<vector<int>> &initial,map<int,pair<int,int>> &m)
 {
     int n = initial.size();
-    PuzzleState initialState(initial, 0, manhattanDistance(initial));
+    int level=0;
+    PuzzleState initialState(initial, 0, manhattanDistance(initial,m));
     priority_queue<pair<int, PuzzleState>, vector<pair<int, PuzzleState>>, greater<pair<int, PuzzleState>>> pq;
     set<vector<vector<int>>> visited;
 
@@ -104,13 +105,13 @@ vector<vector<int>> solvePuzzle(const vector<vector<int>> &initial)
 
         if (current.h == 0)
         {
-            // Found the goal state
+            cout<<"level "<<level<<endl;
             return current.board;
         }
 
         visited.insert(current.board);
 
-        vector<PuzzleState> nextStates = getNextStates(current);
+        vector<PuzzleState> nextStates = getNextStates(current,m);
         for (const PuzzleState &nextState : nextStates)
         {
             if (visited.find(nextState.board) == visited.end())
@@ -119,6 +120,7 @@ vector<vector<int>> solvePuzzle(const vector<vector<int>> &initial)
                 visited.insert(nextState.board);
             }
         }
+        level++;
     }
 
     // No solution found
@@ -141,14 +143,28 @@ void printPuzzle(const vector<vector<int>> &puzzle)
 int main()
 {
     vector<vector<int>> initial = {
-        {1, 2, 5},
-        {4, 3, 6},
-        {0, 7, 8}};
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 0}};
+
+    vector<vector<int>> final = {
+        {1, 0, 3},
+        {4, 2, 6},
+        {7, 5, 8}};
+
+    map<int,pair<int,int>> m;
+
+    int n=final.size();
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            m[final[i][j]]={i,j};
+        }
+    }
 
     cout << "Initial Puzzle:" << endl;
     printPuzzle(initial);
 
-    vector<vector<int>> solution = solvePuzzle(initial);
+    vector<vector<int>> solution = solvePuzzle(initial,m);
 
     cout << "\nSolution:" << endl;
     if (!solution.empty())

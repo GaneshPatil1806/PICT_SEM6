@@ -21,9 +21,9 @@ public:
     }
 
     void handleUserInput(const string& userInput) {  
-
         // Check if user input contains a keyword from context
         for (const auto& pair : context) {
+            
             if (userInput.find(pair.first) != string::npos) {
                 // Update current context
                 context["current_context"] = pair.second;
@@ -60,6 +60,7 @@ public:
 };
 
 int main() {
+    
     CustomerServiceChatbot chatbot;
 
     cout << "Welcome to Customer Service Chatbot" << endl;
@@ -67,6 +68,7 @@ int main() {
 
     string userInput;
     while (true) {
+
         cout << "User: ";
         getline(cin, userInput);
 
